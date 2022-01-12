@@ -5,14 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClientListPageComponent } from './pages/client-list-page/client-list-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: },
-    ]),
+    AppRoutingModule,
     BrowserAnimationsModule
   ],
   declarations: [
@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  providers: []
 })
 export class AppModule { }

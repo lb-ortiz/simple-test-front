@@ -1,0 +1,22 @@
+.client-list{
+  padding: 50px;
+  &__header {
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 20px;
+  }
+
+  &__divider {
+    margin: 16px 0;
+    color: black;
+  }
+
+  &__empty-message {
+    text-align: center;
+  }
+}
+
+table {
+  width: 100%;
+}
+
