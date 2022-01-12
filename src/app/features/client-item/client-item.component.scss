@@ -1,0 +1,48 @@
+
+.client-item{
+  padding: 50px;
+  &__header {
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 20px;
+  }
+
+  &__labels {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    align-items: flex-end;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    .label{
+      padding:20px;
+      border-radius:10px;
+      align-items:left;
+      justify-content:left;
+    }
+  }
+
+  &__email {
+    padding: 15px;
+  }
+
+  &__profile-image {
+    margin-right: 16px;
+  }
+
+  &__body{
+    margin-bottom: 16px;
+  }
+
+  &__buttons{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__divider {
+    margin: 16px 0;
+    color: black;
+  }
+}
+.label-title {
+  font-weight: bold;
+}

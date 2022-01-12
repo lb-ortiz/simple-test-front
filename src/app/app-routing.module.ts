@@ -9,6 +9,13 @@ const routes: Routes = [
         m => m.ClientListPageModule
       ),
   },
+  {
+    path: 'client-list/item',
+    loadChildren: () =>
+      import('./pages/client-item-page/client-item-page.module').then(
+        m => m.ClientItemPageModule
+      ),
+  },
   { path: '', redirectTo: 'client-list', pathMatch: 'full' },
 ];
 
