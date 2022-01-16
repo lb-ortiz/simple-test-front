@@ -1,21 +1,46 @@
-import { Client } from './../features/client-list/client-list.component';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { Client, ClientData } from '../core/interfaces/client.model';
 
 
 @Injectable({ providedIn: 'root' })
 export class ClientListService {
     /**
-     * Client
+     * Get list of transaction
      */
-    private _client!: Client;
+    public get clientList(): ClientData | null {
+        return this._clientList;
+    }
 
     /**
      * Client list
      */
-    private _clientList!: {};
+    private _clientList!: ClientData;
+
+    /**
+   * Get client
+   */
+  public get client(): Client {
+    if (!this._client) {
+      void this._router.navigate([`/client-list`]);
+    }
+
+    return this._client;
+  }
+
+    /**
+     * Client
+     */
+     private _client!: Client;
+
+    /**
+     * Api Url
+     */
+    public get api(): string {
+        return `http://localhost:8080`;
+    }
 
     /**
      * @internal
@@ -23,22 +48,20 @@ export class ClientListService {
     constructor(
         private _router: Router,
         private _httpClient: HttpClient,
-
     ) {}
 
     /**
-     * Get transaction list
-     * @returns {Observable<ClientListResponse>} data
+     * Get client list
+     * @returns {Observable<ClientData>} data
      */
-    // public getTransactionList(): Observable<ClientListResponse> {
-    //     return this._httpClient
-    //     .get<ClientListResponse>(``)
-    //     .pipe(
-    //         tap(
-    //         clientList => (this._clientList = clientList.data.attributes)
-    //         )
-    //     );
-    // }
+    public getClientList():  Observable<ClientData> {
+        return this._httpClient.get<ClientData>(`http://localhost:8080/api/client`)
+        .pipe(
+            tap(
+                clientList => (this._clientList = clientList)
+            )
+        );
+    }
 
     /**
      * Navigate to client details

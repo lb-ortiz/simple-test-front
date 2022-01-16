@@ -1,14 +1,11 @@
+import { ClientData } from './../../core/interfaces/client.model';
 import { ClientListService } from '../../services/client-list.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Client } from 'src/app/core/interfaces/client.model';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
-export interface Client {
-  nickname: string;
-  inscription: string;
-  name: string;
-  status: string;
-}
+
 
 @Component({
   selector: 'client-list',
@@ -17,19 +14,41 @@ export interface Client {
 })
 export class ClientListComponent implements OnInit {  
   displayedColumns: string[] = ['inscription', 'nickname', 'name', 'status'];
-  data = new MatTableDataSource<Client>(ELEMENT_DATA);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.data.paginator = this.paginator;
-  }
+  data!: Client[];
+  data2!: ClientData;
+  
   /**
   * @internal
   */
-  constructor(private clientListService: ClientListService) {}
+  constructor(
+    private clientListService: ClientListService,
+    private router: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.data2 = this.clientListService.getClientList();
+    console.log('data2:', this.data2)
+    this.searchClients();
+  }
+
+  /**
+   * Search clients
+   */
+  searchClients(): void {
+    this.clientListService.getClientList()
+    .subscribe((response: ClientData) => this.populateData(response));
+  }
+
+  /**
+   * Populate 
+   * @param response: ClientData
+   */
+  populateData(response: ClientData): void {
+    if(response){
+      this.data = response?.clients;
+    }
+    console.log('populate:', this.data);
+  }
 
   /**
    * Open client details details
@@ -39,28 +58,3 @@ export class ClientListComponent implements OnInit {
   }
 }
 
-
-
-
-const ELEMENT_DATA: Client[] = [
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-  {inscription: '111111111111111111111', nickname: 'teste a', name: 'teste', status: 'Ativo'},
-];

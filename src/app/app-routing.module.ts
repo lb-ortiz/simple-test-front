@@ -16,7 +16,7 @@ const routes: Routes = [
         m => m.ClientItemPageModule
       ),
   },
-  { path: '', redirectTo: 'client-list', pathMatch: 'full' },
+  { path: '**', redirectTo: 'client-list', pathMatch: 'full' },
 ];
 
 @NgModule({

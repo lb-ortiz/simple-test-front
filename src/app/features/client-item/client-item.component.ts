@@ -1,12 +1,8 @@
+import { Client, Email } from './../../core/interfaces/client.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ClientListService } from 'src/app/services/client-list.service';
 
-export interface Email {
-  occupation: string;
-  name: string;
-  email: string;
-}
 
 @Component({
   selector: 'client-item',
@@ -15,35 +11,39 @@ export interface Email {
 })
 export class ClientItemComponent implements OnInit {
   
-  emails = ELEMENT_DATA;
+  clientData!: Client
+  
+  emails!: Email[];
+
+  // /**
+  //  * Id
+  //  */
+  // get id(): string {
+  //   const id = this._activatedRoute.snapshot.paramMap.get('id');
+  //   return id ?? '';
+  // }
 
   /**
    * @internal
    */
   constructor(
     private _clientListService: ClientListService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private _activatedRoute: ActivatedRoute
+
+    ) {}
 
 
   ngOnInit(): void {
-    // this.getTransaction();
-    // this.getCheckingAccount();
   }
+
 
   /**
    * Get Transaction Data from service
    */
-  // getTransaction(): void {
-  //   this.transactionData = this._clientListService.transaction;
-  // }
-
-  /**
-   * Get Checking Account from service
-   */
-  // getCheckingAccount(): void {
-  //   this.checkingAccountData = this._clientListService.checkingAccount;
-  // }
+   getClient(): void {
+    this.clientData = this._clientListService.client;
+  }
 
   /**
    * Back to transaction details
@@ -53,15 +53,3 @@ export class ClientItemComponent implements OnInit {
   }
 
 }
-
-const ELEMENT_DATA: Email[] = [
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-  {occupation: 'teste',  name: 'teste 1', email: 'teste@teste'},
-];

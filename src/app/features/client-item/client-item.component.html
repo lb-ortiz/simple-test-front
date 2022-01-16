@@ -9,19 +9,19 @@
       </div>
       <div class="label">
         <span class="label-title">Inscrição:</span>
-        <span class="label">xxxxxxxx</span>
+        <span class="label">{{clientData?.inscription || '-'}} </span>
       </div>
       <div class="label">
         <span class="label-title">Apelido:</span>
-        <span class="label">xxxxxxxx</span>
+        <span class="label">{{clientData?.nickname || '-'}}</span>
       </div>
       <div class="label">
         <span class="label-title">Nome:</span>
-        <span class="label">xxxxxxxx</span>
+        <span class="label">{{clientData?.name || '-'}}</span>
       </div>
       <div class="label">
         <span class="label-title">Status:</span>
-        <span class="label">xxxxxxxx</span>
+        <span class="label">{{clientData?.status || '-'}}</span>
       </div>
     </div>
 
@@ -29,9 +29,9 @@
       E-mails:
       <div *ngFor="let item of emails">
         <div class="email-row">
-          <span class="email-row__occupation"> {{item.occupation}} </span>
+          <!-- <span class="email-row__occupation"> {{item.occupation}} </span>
           <span class="email-row__name"> {{item.name}} </span>
-          <span class="email-row__email"> {{item.email}} </span>
+          <span class="email-row__email"> {{item.email}} </span> -->
         </div>
       </div>
     </div>
@@ -39,6 +39,7 @@
     <div class="client-item__buttons">
       <button mat-button color="primary">Salvar</button>
       <button mat-button color="warn">Excluir</button>
+      <button mat-button color="primary" (click)="backList()">Voltar</button>
     </div>
   </div>
 </div>
