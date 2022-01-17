@@ -8,7 +8,7 @@ export interface Client {
   inscription: string;
   name: string;
   status: string;
-  email: Email[];
+  emails: Email[];
 }
 
 export interface Email {

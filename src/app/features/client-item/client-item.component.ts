@@ -13,7 +13,7 @@ export class ClientItemComponent implements OnInit {
   
   clientData!: Client
   
-  emails!: Email[];
+  emails: Email[] = [];
 
   // /**
   //  * Id
@@ -35,6 +35,7 @@ export class ClientItemComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getClient();
   }
 
 
@@ -43,6 +44,7 @@ export class ClientItemComponent implements OnInit {
    */
    getClient(): void {
     this.clientData = this._clientListService.client;
+    this.emails = this._clientListService.client.emails;
   }
 
   /**

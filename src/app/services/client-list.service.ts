@@ -54,13 +54,21 @@ export class ClientListService {
      * Get client list
      * @returns {Observable<ClientData>} data
      */
-    public getClientList():  Observable<ClientData> {
-        return this._httpClient.get<ClientData>(`http://localhost:8080/api/client`)
-        .pipe(
-            tap(
-                clientList => (this._clientList = clientList)
-            )
-        );
+    // public getClientList() {
+    //     return this._httpClient.get<ClientData>(`http://localhost:8080/api/client`)
+    //     .pipe(
+    //         tap(
+    //             clientList => (this._clientList = clientList)
+    //         )
+    //     );
+    // }
+
+    /**
+     * Get client list
+     * @returns {Observable<ClientData>} data
+     */
+     public getClientList() {
+        return this._httpClient.get<Client[]>(`http://localhost:8080/api/client`);
     }
 
     /**

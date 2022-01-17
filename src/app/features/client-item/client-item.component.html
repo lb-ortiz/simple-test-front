@@ -26,12 +26,11 @@
     </div>
 
     <div class="client-item__email">
-      E-mails:
-      <div *ngFor="let item of emails">
+      <div *ngFor="let item of clientData?.emails">
         <div class="email-row">
-          <!-- <span class="email-row__occupation"> {{item.occupation}} </span>
-          <span class="email-row__name"> {{item.name}} </span>
-          <span class="email-row__email"> {{item.email}} </span> -->
+          <span class="email-row__occupation"> {{item?.occupation}} </span>
+          <span class="email-row__name"> {{item?.name}} </span>
+          <span class="email-row__email"> {{item?.email}} </span>
         </div>
       </div>
     </div>
