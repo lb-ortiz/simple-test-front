@@ -54,4 +54,24 @@ export class ClientItemComponent implements OnInit {
     void this.router.navigate(['/client-list']);
   }
 
+  /**
+   * Back to transaction details
+   */
+   deleteClient(): void {
+    void this.router.navigate(['/client-list']);
+  }
+
+  /**
+   * Back to transaction details
+   */
+  saveClient(): void {
+    void this.router.navigate(['/client-list/item']);
+  }
+
+  /**
+   * Back to transaction details
+   */
+   deleteEmail(): void {
+    void this.router.navigate(['/client-list/item']);
+  }
 }
