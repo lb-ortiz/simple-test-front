@@ -39,7 +39,7 @@ export class ClientListService {
      * Api Url
      */
     public get api(): string {
-        return `http://localhost:8080`;
+        return `http://localhost:8080/api/client`;
     }
 
     /**
@@ -51,24 +51,19 @@ export class ClientListService {
     ) {}
 
     /**
-     * Get client list
-     * @returns {Observable<ClientData>} data
+     * Delete Client
+     * @param id: number
      */
-    // public getClientList() {
-    //     return this._httpClient.get<ClientData>(`http://localhost:8080/api/client`)
-    //     .pipe(
-    //         tap(
-    //             clientList => (this._clientList = clientList)
-    //         )
-    //     );
-    // }
+    deleteRequest(id: number): Observable<unknown> {
+        return this._httpClient.delete(`${this.api}/${id}`);
+    }
 
     /**
      * Get client list
      * @returns {Observable<ClientData>} data
      */
      public getClientList() {
-        return this._httpClient.get<Client[]>(`http://localhost:8080/api/client`);
+        return this._httpClient.get<Client[]>(`${this.api}`);
     }
 
     /**

@@ -2,6 +2,11 @@
   <h1 class="email-list__header">Lista de E-mails</h1>
   <hr class="email-list__divider" />
   <div class="email-list__body">
+    <div class="email-list__buttons">
+      <button mat-raised-button (click)="openDialog()">
+        Adicionar E-mail
+      </button>
+    </div>
     <table mat-table [dataSource]="data" class="mat-elevation-z8">
 
       <ng-container matColumnDef="occupation">
@@ -22,9 +27,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element"> 
-          <button mat-icon-button>
-            <mat-icon>edit</mat-icon>
-          </button>
+          
         </td>
       </ng-container>
 

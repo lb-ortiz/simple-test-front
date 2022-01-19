@@ -15,25 +15,19 @@ export class ClientItemComponent implements OnInit {
   
   emails: Email[] = [];
 
-  // /**
-  //  * Id
-  //  */
-  // get id(): string {
-  //   const id = this._activatedRoute.snapshot.paramMap.get('id');
-  //   return id ?? '';
-  // }
-
   /**
    * @internal
    */
   constructor(
     private _clientListService: ClientListService,
+    private _activatedRoute: ActivatedRoute,
     private router: Router,
-    private _activatedRoute: ActivatedRoute
 
     ) {}
 
-
+  /**
+   * @internal
+   */
   ngOnInit(): void {
     this.getClient();
   }
@@ -58,20 +52,9 @@ export class ClientItemComponent implements OnInit {
    * Back to transaction details
    */
    deleteClient(): void {
-    void this.router.navigate(['/client-list']);
-  }
-
-  /**
-   * Back to transaction details
-   */
-  saveClient(): void {
-    void this.router.navigate(['/client-list/item']);
-  }
-
-  /**
-   * Back to transaction details
-   */
-   deleteEmail(): void {
-    void this.router.navigate(['/client-list/item']);
+    console.log('esse cliente aqui o', this.clientData.id);
+    this._clientListService.deleteRequest(this.clientData.id).subscribe(() => {
+      void this.router.navigate(['/client-list']);
+    });
   }
 }

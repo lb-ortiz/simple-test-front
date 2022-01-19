@@ -14,7 +14,24 @@
   &__empty-message {
     text-align: center;
   }
+
+  &__buttons{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
 }
+
+::ng-deep .mat-form-field {
+  display: unset !important; 
+}
+
+::ng-deep .mat-dialog-actions {
+  justify-content: flex-end !important;
+  padding: 10px;
+}
+
+
 
 table {
   width: 100%;

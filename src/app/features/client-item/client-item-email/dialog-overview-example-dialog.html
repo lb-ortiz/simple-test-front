@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Adicionar E-mail</h1>
+<div mat-dialog-content>
+  <p>Cargo:</p>
+  <mat-form-field class="fields" appearance="fill">
+    <mat-label>Cargo</mat-label>
+    <input matInput [(ngModel)]="data.occupation">
+  </mat-form-field>
+  <p>Nome:</p>
+  <mat-form-field class="fields" appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <p>E-mail:</p>
+  <mat-form-field class="fields" appearance="fill">
+    <mat-label>E-mail</mat-label>
+    <input matInput [(ngModel)]="data.email">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="buttons">
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Adicionar</button>
+</div>

@@ -7,6 +7,10 @@
     margin-top: 20px;
   }
 
+  &__img {
+    width: 20%;
+  }
+
   &__row {
     display: inline;
   }
@@ -44,4 +48,8 @@
 }
 .label-title {
   font-weight: bold;
+}
+
+::ng-deep img {
+  width: 120%;
 }

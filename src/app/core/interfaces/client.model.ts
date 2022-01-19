@@ -3,16 +3,17 @@ export interface ClientData {
 }
 
 export interface Client {
-  id: string;
+  id: number;
   nickname: string;
   inscription: string;
   name: string;
   status: string;
   emails: Email[];
+  image: string;
 }
 
 export interface Email {
-  id: string;
+  id: number;
   occupation: string;
   name: string;
   email: string;
