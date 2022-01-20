@@ -11,9 +11,20 @@ import { ClientListService } from 'src/app/services/client-list.service';
 })
 export class ClientItemComponent implements OnInit {
   
+  /**
+   * Client data
+   */
   clientData!: Client
-  
+
+  /**
+   * Email list
+   */
   emails: Email[] = [];
+
+  /**
+   * Edit boolean
+   */
+  isEditing: boolean = false;
 
   /**
    * @internal
@@ -47,13 +58,30 @@ export class ClientItemComponent implements OnInit {
   }
 
   /**
-   * delete client
+   * Delete client
    */
-   deleteClient(): void {
-    this._clientListService.deleteRequest(this.clientData.id).subscribe(() => {
-      void this.router.navigate(['/client-list']);
-    });
+  deleteClient(): void {
+  this._clientListService.deleteRequest(this.clientData.id).subscribe(() => {
+    void this.router.navigate(['/client-list']);
+  });
   }
 
+  /**
+   * Edit client
+   */
+  editClient():void {
+    if (this.isEditing === false) {
+      this.isEditing = true;
+    }
+  }
+
+  /**
+   * Save client
+   */
+  saveClient():void {
+    if (this.isEditing === true) {
+      this.isEditing = false;
+    }
+  }
   
 }

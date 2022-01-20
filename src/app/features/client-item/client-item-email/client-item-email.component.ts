@@ -14,21 +14,53 @@ import { ClientListService } from 'src/app/services/client-list.service';
 export class EmailListComponent implements OnInit, OnDestroy {  
   displayedColumns: string[] = ['occupation', 'name', 'email', 'edit', 'delete'];
   
+  /**
+   * Input data client
+   */
   @Input()
   data!: Client;
+
+  /**
+   * Input editing mode
+   */
+  @Input()
+  isEditing!: boolean;
+
+  /**
+   * Email list
+   */
   emailList: Email[] = [];
 
+  /**
+   * Email obj
+   */
   emailObj!: Email;
+
+  /**
+   * Email ojetc item
+   */
   occupation!: string;
+  
+  /**
+   * Email ojetc item
+   */
   name!: string;
+  
+  /**
+   * Email ojetc item
+   */
   email!: string;
+  
+  /**
+   * Subscription
+   */
   subscription: any;
   
  
   
   /**
-  * @internal
-  */
+   * @internal
+   */
   constructor(
     public dialog: MatDialog,
     private _emailService: EmailService,
@@ -36,16 +68,25 @@ export class EmailListComponent implements OnInit, OnDestroy {
 
   ) {}
 
+  /**
+   * @internal
+   */
   ngOnInit(): void {
-    this.emailList = this.data.emails;
+    this.emailList = this.data?.emails;
   }
 
+  /**
+   * @internal
+   */
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 
+  /**
+   * Refresh component
+   */
   refresh(): void {
     window.location.reload();
   }
@@ -59,6 +100,9 @@ export class EmailListComponent implements OnInit, OnDestroy {
      });
   }
 
+  /**
+   * Open Modal
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogEmailDialog, {
       width: '500px',
@@ -83,7 +127,7 @@ export class EmailListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * add email
+   * Add email
    */
   addEmail(email: Email): void {
     this._emailService.addRequest(email).subscribe(() => {
@@ -97,15 +141,18 @@ export class EmailListComponent implements OnInit, OnDestroy {
 })
 export class DialogEmailDialog {
   
-  emailObj!: Email;
-
-
+  /**
+   * @internal
+   */
   constructor(
     public dialogRef: MatDialogRef<DialogEmailDialog>,
     private _emailService: EmailService,
     @Inject(MAT_DIALOG_DATA) public data: Email,
   ) {}
 
+  /**
+   * Cancell add email
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }

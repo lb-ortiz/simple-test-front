@@ -13,21 +13,33 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class ClientListComponent implements OnInit {  
   @ViewChild('paginator') paginator!: MatPaginator;
-
+  /**
+   * Columns
+   */
   displayedColumns: string[] = ['inscription', 'nickname', 'name', 'status'];
+
+  /**
+   * Client list
+   */
   data: Client[] = [];
+
+  /**
+   * Data Source for paginator
+   */
   dataSource!: MatTableDataSource<Client>;
 
   /**
-  * @internal
-  */
+   * @internal
+   */
   constructor(
     private clientListService: ClientListService,
   ) {}
 
+  /**
+   * @internal
+   */
   ngOnInit(): void {
     this.searchClients();
-
   }
 
   /**
@@ -45,7 +57,6 @@ export class ClientListComponent implements OnInit {
   populateData(response: Client[]): void {
       this.data = response;
       this.dataSource = new MatTableDataSource<Client>(this.data);
-      console.log(this.dataSource)
       this.dataSource.paginator = this.paginator;
   }
 
@@ -56,8 +67,5 @@ export class ClientListComponent implements OnInit {
     this.clientListService.openClientDetails(client);
   }
 
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-}
 }
 

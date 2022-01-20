@@ -26,11 +26,13 @@
       </div>
     </div>
     <div class="client-item__email">
-      <email-list [data]="clientData"></email-list>
+      <email-list [data]="clientData" [isEditing]="isEditing"></email-list>
     </div>
     
     <div class="client-item__buttons">
-      <button mat-button color="warn" (click)="deleteClient()" >Excluir Cliente</button>
+      <button *ngIf="!isEditing" mat-raised-button (click)="editClient()">Editar</button>
+      <button *ngIf="isEditing" mat-button color="warn" (click)="saveClient()" >Salvar</button>
+      <button *ngIf="isEditing" mat-button color="warn" (click)="deleteClient()" >Excluir Cliente</button>
       <button mat-button color="primary" (click)="backList()">Voltar</button>
     </div>
   </div>
