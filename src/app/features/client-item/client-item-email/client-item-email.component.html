@@ -3,7 +3,7 @@
   <hr class="email-list__divider" />
   <div class="email-list__body">
     <div class="email-list__buttons">
-      <button mat-raised-button (click)="openDialog()">
+      <button mat-raised-button *ngIf="isEditing" (click)="openDialog()">
         Adicionar E-mail
       </button>
     </div>

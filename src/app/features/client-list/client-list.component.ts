@@ -12,7 +12,11 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./client-list.component.scss'],
 })
 export class ClientListComponent implements OnInit {  
+  /**
+   * Columns
+   */
   @ViewChild('paginator') paginator!: MatPaginator;
+
   /**
    * Columns
    */
@@ -56,8 +60,7 @@ export class ClientListComponent implements OnInit {
    */
   populateData(response: Client[]): void {
       this.data = response;
-      this.dataSource = new MatTableDataSource<Client>(this.data);
-      this.dataSource.paginator = this.paginator;
+      this.dataSource = new MatTableDataSource<Client>(response);
   }
 
   /**
@@ -66,6 +69,5 @@ export class ClientListComponent implements OnInit {
    openClientDetails(client: Client): void {
     this.clientListService.openClientDetails(client);
   }
-
 }
 
