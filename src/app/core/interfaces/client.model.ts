@@ -13,8 +13,8 @@ export interface Client {
 }
 
 export interface Email {
-  id: number;
   occupation: string;
   name: string;
   email: string;
+  idClient: number;
 }

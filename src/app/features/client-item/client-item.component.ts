@@ -1,6 +1,6 @@
 import { Client, Email } from './../../core/interfaces/client.model';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClientListService } from 'src/app/services/client-list.service';
 
 
@@ -20,7 +20,6 @@ export class ClientItemComponent implements OnInit {
    */
   constructor(
     private _clientListService: ClientListService,
-    private _activatedRoute: ActivatedRoute,
     private router: Router,
 
     ) {}
@@ -34,27 +33,27 @@ export class ClientItemComponent implements OnInit {
 
 
   /**
-   * Get Transaction Data from service
+   * Get client Data from service
    */
    getClient(): void {
     this.clientData = this._clientListService.client;
-    this.emails = this._clientListService.client.emails;
   }
 
   /**
-   * Back to transaction details
+   * Back to client details
    */
   backList(): void {
     void this.router.navigate(['/client-list']);
   }
 
   /**
-   * Back to transaction details
+   * delete client
    */
    deleteClient(): void {
-    console.log('esse cliente aqui o', this.clientData.id);
     this._clientListService.deleteRequest(this.clientData.id).subscribe(() => {
       void this.router.navigate(['/client-list']);
     });
   }
+
+  
 }

@@ -2,7 +2,7 @@
   <h1 class="client-list__header">Lista de Clientes</h1>
   <hr class="client-list__divider" />
   <div class="client-list__body">
-    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="inscription">
         <th mat-header-cell *matHeaderCellDef> Inscrição </th>
@@ -30,7 +30,7 @@
       (click)="openClientDetails(row)"></tr>
     </table>
     
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    <mat-paginator [length]="data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
                   showFirstLastButtons 
                   aria-label="Select page of periodic elements">
     </mat-paginator>

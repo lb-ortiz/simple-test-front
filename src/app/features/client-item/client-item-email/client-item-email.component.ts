@@ -1,7 +1,9 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Client } from './../../../core/interfaces/client.model';
+import { EmailService } from './../../../services/email.service';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Email } from 'src/app/core/interfaces/client.model';
-import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ClientListService } from 'src/app/services/client-list.service';
 
 
 @Component({
@@ -9,55 +11,98 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   templateUrl: './client-item-email.component.html',
   styleUrls: ['./client-item-email.component.scss'],
 })
-export class EmailListComponent implements OnInit {  
+export class EmailListComponent implements OnInit, OnDestroy {  
   displayedColumns: string[] = ['occupation', 'name', 'email', 'edit', 'delete'];
   
   @Input()
-  data: Email[] = [];
+  data!: Client;
+  emailList: Email[] = [];
 
+  emailObj!: Email;
   occupation!: string;
   name!: string;
   email!: string;
+  subscription: any;
+  
  
   
   /**
   * @internal
   */
   constructor(
-    private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _emailService: EmailService,
+    private _clientService: ClientListService
+
   ) {}
 
   ngOnInit(): void {
+    this.emailList = this.data.emails;
   }
 
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
 
   /**
-   * Back to transaction details
+   * Back to client details
    */
-   deleteEmail(): void {
-    void this.router.navigate(['/client-list/item']);
+  deleteEmail(id: number): void {
+    this.subscription = this._emailService.deleteRequest(id).subscribe(() => {
+      this.refresh();
+     });
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    const dialogRef = this.dialog.open(DialogEmailDialog, {
       width: '500px',
       data: {occupation: this.occupation, name: this.name, email: this.email},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.occupation = result;
+      if(result.email != null) {
+        this.occupation = result.occupation;
+        this.name = result.name;
+        this.email = result.email;
+        this.emailObj = {
+          name: this.name,
+          email: this.email,
+          occupation: this.occupation,
+          idClient: this._clientService.client.id
+        }; 
+        this.addEmail(this.emailObj);
+        this.refresh();
+      }
+    });
+  }
+
+  /**
+   * add email
+   */
+  addEmail(email: Email): void {
+    this._emailService.addRequest(email).subscribe(() => {
     });
   }
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './dialog-overview-example-dialog.html',
+  selector: 'dialog-email',
+  templateUrl: './dialog-email.html',
 })
-export class DialogOverviewExampleDialog {
+export class DialogEmailDialog {
+  
+  emailObj!: Email;
+
+
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<DialogEmailDialog>,
+    private _emailService: EmailService,
     @Inject(MAT_DIALOG_DATA) public data: Email,
   ) {}
 

@@ -1,9 +1,8 @@
-import { ClientData } from './../../core/interfaces/client.model';
 import { ClientListService } from '../../services/client-list.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from 'src/app/core/interfaces/client.model';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -13,21 +12,22 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./client-list.component.scss'],
 })
 export class ClientListComponent implements OnInit {  
+  @ViewChild('paginator') paginator!: MatPaginator;
+
   displayedColumns: string[] = ['inscription', 'nickname', 'name', 'status'];
   data: Client[] = [];
-  data2: Client[] = [];
-  data3!: Subscription;
-  
+  dataSource!: MatTableDataSource<Client>;
+
   /**
   * @internal
   */
   constructor(
     private clientListService: ClientListService,
-    private router: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.searchClients();
+
   }
 
   /**
@@ -44,14 +44,20 @@ export class ClientListComponent implements OnInit {
    */
   populateData(response: Client[]): void {
       this.data = response;
+      this.dataSource = new MatTableDataSource<Client>(this.data);
+      console.log(this.dataSource)
+      this.dataSource.paginator = this.paginator;
   }
 
   /**
    * Open client details details
    */
    openClientDetails(client: Client): void {
-     console.log('client:', client)
     this.clientListService.openClientDetails(client);
   }
+
+  ngAfterViewInit() {
+    // this.dataSource.paginator = this.paginator;
+}
 }
 

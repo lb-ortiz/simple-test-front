@@ -26,11 +26,10 @@
       </div>
     </div>
     <div class="client-item__email">
-      <email-list [data]="emails"></email-list>
+      <email-list [data]="clientData"></email-list>
     </div>
     
     <div class="client-item__buttons">
-      <!-- <button mat-button color="primary" (click)="saveClient()">Salvar</button> -->
       <button mat-button color="warn" (click)="deleteClient()" >Excluir Cliente</button>
       <button mat-button color="primary" (click)="backList()">Voltar</button>
     </div>

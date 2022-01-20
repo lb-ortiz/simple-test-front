@@ -55,7 +55,7 @@ export class ClientListService {
      * @param id: number
      */
     deleteRequest(id: number): Observable<unknown> {
-        return this._httpClient.delete(`${this.api}/${id}`);
+        return this._httpClient.delete(`${this.api}/client/${id}`);
     }
 
     /**

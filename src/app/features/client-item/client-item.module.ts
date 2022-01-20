@@ -1,4 +1,4 @@
-import { DialogOverviewExampleDialog, EmailListComponent } from './client-item-email/client-item-email.component';
+import { DialogEmailDialog, EmailListComponent } from './client-item-email/client-item-email.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  declarations: [ClientItemComponent, EmailListComponent, DialogOverviewExampleDialog],
+  declarations: [ClientItemComponent, EmailListComponent, DialogEmailDialog],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -23,7 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [ClientItemComponent],
 })
